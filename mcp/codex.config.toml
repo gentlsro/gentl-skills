@@ -1,0 +1,12 @@
+# Add to ~/.codex/config.toml (or .codex/config.toml in a trusted project).
+# Codex reads the API key from GENTL_API_KEY and sends it as "Authorization: Bearer <key>".
+
+[mcp_servers.gentl-tasks]
+url = "https://<your-gentl-host>/api/mcp/gentl"
+bearer_token_env_var = "GENTL_API_KEY"
+http_headers = { "X-Instance-Id" = "<your-instance-id>" }
+
+[mcp_servers.gentl-editor]
+url = "https://<your-gentl-host>/api/mcp"
+bearer_token_env_var = "GENTL_API_KEY"
+http_headers = { "X-Instance-Id" = "<your-instance-id>" }

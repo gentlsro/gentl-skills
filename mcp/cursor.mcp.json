@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "gentl-tasks": {
+      "url": "https://<your-gentl-host>/api/mcp/gentl",
+      "headers": {
+        "Authorization": "Bearer ${env:GENTL_API_KEY}",
+        "X-Instance-Id": "<your-instance-id>"
+      }
+    },
+    "gentl-editor": {
+      "url": "https://<your-gentl-host>/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:GENTL_API_KEY}",
+        "X-Instance-Id": "<your-instance-id>"
+      }
+    }
+  }
+}

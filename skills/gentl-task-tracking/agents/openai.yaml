@@ -1,0 +1,4 @@
+interface:
+  display_name: "Gentl Task Tracking"
+  short_description: "Mirror implementation progress and prompt summaries onto a Gentl board"
+  default_prompt: "Use $gentl-task-tracking to track this work item on the Gentl board while we implement it."
