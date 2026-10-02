@@ -67,5 +67,6 @@ in your browser; saving and publishing stay with you.
 
 ## Feedback
 
-Issues and pull requests are welcome. The skill in this repository is published from the Gentl monorepo, where its
-end-to-end test (a real coding agent driven through a scripted developer session) lives.
+Issues and pull requests are welcome. The skills live in this repository. The Gentl MCP servers they use, and the
+end-to-end test that drives `gentl-task-tracking` with a real coding agent through a scripted developer session, live
+in the Gentl monorepo.
