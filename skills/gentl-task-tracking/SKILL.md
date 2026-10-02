@@ -1,6 +1,6 @@
 ---
 name: gentl-task-tracking
-description: Mirror a working session onto a Gentl board through the Gentl Tasks MCP while the work happens: implementation, bug fixing, research, investigation, design, or any other work done with an agent. Use when the developer names a Gentl Task (board number like #412, or its name), references a tracker item (Azure DevOps work item, GitLab or GitHub issue, Jira ticket, a pasted URL or id, or a branch named after one), or asks to track, log, or report the work on the Gentl board. Keeps the board Task, its steps, and a summarized log of the developer's prompts in sync as the plan changes.
+description: "Mirror a working session onto a Gentl board through the Gentl Tasks MCP while the work happens: implementation, bug fixing, research, investigation, design, or any other work done with an agent. Use when the developer names a Gentl Task (board number like #412, or its name), references a tracker item (Azure DevOps work item, GitLab or GitHub issue, Jira ticket, a pasted URL or id, or a branch named after one), or asks to track, log, or report the work on the Gentl board. Keeps the board Task, its steps, and a summarized log of the developer's prompts in sync as the plan changes."
 ---
 
 # Gentl Task Tracking
