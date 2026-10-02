@@ -84,6 +84,35 @@ query_tasks {
 A Task found by name is correlated when it or its steps carry a reference this skill wrote (step externalIds ending
 in `/step-<slug>`, or `metadata.source` of `gentl-task-tracking`); continue with that `provider` and `externalId`.
 
+### Attach a tracker item to an existing Task
+
+When a board-native Task gets a tracker item (found by name while the item is known, or the item turns up
+mid-session), attach the work Task first, then each existing step, in board order:
+
+```json
+upsert_tracked_task {
+  "provider": "azure-devops",
+  "externalId": "acme/18342",
+  "taskId": "<work Task id>",
+  "url": "https://dev.azure.com/acme/shop/_workitems/edit/18342",
+  "metadata": { "source": "gentl-task-tracking", "harness": "claude-code" }
+}
+```
+
+```json
+upsert_tracked_task { "provider": "azure-devops", "externalId": "acme/18342/step-collect-limits", "taskId": "<step id>" }
+```
+
+- The reply has `created: false` and the Task you passed. Repeating the call is safe and may carry a patch (status,
+  description) like any tracked upsert. A Task may carry several correlations.
+- Derive each step slug from the step's current name, once; it is the step's identity from now on. Include finished
+  and archived steps so they are not recreated later.
+- `CONFLICT` with `details.taskId`: the key already belongs to that other Task. Do not retry with another `taskId` or a
+  changed key; show the developer both Tasks and ask which one to continue.
+- `NOT_FOUND` or `FORBIDDEN`: the Task id is wrong or the board is read-only; nothing was attached.
+- Older deployments have no `taskId` on `upsert_tracked_task` (its input schema does not list it, or the call is
+  rejected for a missing `name`). There, keep the Task board-native and list the item under **Linked items**.
+
 ### Pick the board and read its metadata
 
 ```json
@@ -135,8 +164,9 @@ create_task {
 }
 ```
 
-- `name` and `boardId` are required (`upsert_tracked_task` needs them on the first call only). Use the tracker item's
-  own title, or a short name for the work in the developer's terms, so it can be found by name later.
+- `name` and `boardId` are required (`upsert_tracked_task` needs them on the first call only, and not when `taskId`
+  attaches the key to an existing Task). Use the tracker item's own title, or a short name for the work in the
+  developer's terms, so it can be found by name later.
 - `metadata` (correlated) carries `source: "gentl-task-tracking"` and the harness; add `repo` and `branch` only when
   the work happens in a repository.
 - `type`: the board type closest to the work (Bug, Feature, Story, Task, Research, …); omit when nothing fits.

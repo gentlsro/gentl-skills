@@ -36,6 +36,9 @@ A work Task is addressed in one of two ways, decided once at session start and k
 - **Board-native**: there is no tracker item. The Task is found by its name or board number with `find_tasks` and
   written by its Gentl id. Another session finds it again the same way, from what the developer calls the work.
 
+A board-native Task becomes correlated when a tracker item is attached to it (`upsert_tracked_task` with `taskId`, as
+the cookbook shows); from then on it is written through that correlation. It never goes back to board-native.
+
 Never rely on Gentl ids remembered from an earlier session; look the Task up again each session.
 
 ## Session start
@@ -52,7 +55,10 @@ Never rely on Gentl ids remembered from an earlier session; look the Task up aga
    - Found: read its description, its child steps, and the last few comments, then `get_board_task_metadata` for its
      board (statuses and your permissions). Continue from there. Do not recreate steps that exist. A Task found by
      name that carries a correlation written by this skill (a step reference ending in `/step-…`, or a reference
-     whose metadata has `source: gentl-task-tracking`) is correlated: keep using that key.
+     whose metadata has `source: gentl-task-tracking`) is correlated: keep using that key. A Task found by name
+     without such a correlation, while a tracker item is known (the developer referenced one, or the branch names
+     it), first gets that tracker item attached; `get_task` by the key did not find another Task, or you would be on
+     that one.
    - Not found: `get_task_tracking_context` → pick the board: the one the developer named, else `preferredBoard.board`
      when the preference resolved, else the only board with `canEditTasks: true`. Ask only when several editable
      boards remain or the preference came back with a `problem` (board names can repeat, so show columns or ids) →
@@ -71,9 +77,12 @@ Never rely on Gentl ids remembered from an earlier session; look the Task up aga
 
 Initial steps can be few and coarse. They are expected to change; the record of how they change is part of the value.
 
-A tracker item that turns up later for a board-native Task (the developer pastes an issue link mid-session) goes into
-the tracking section under **Linked items** and gets a `plan-change` entry. Keep the Task board-native; do not create
-a second, correlated Task for the same work.
+A tracker item that turns up later for a board-native Task (the developer pastes an issue link mid-session) is
+attached to it, together with step correlations for its existing steps, and the Task is correlated from then on. List
+the item under **Linked items** and log a `plan-change` entry. Never create a second, correlated Task for the same work.
+If the tracker item is already attached to another Task (`CONFLICT`), do not attach it elsewhere: show the developer
+both Tasks and ask which one to continue. On a deployment that cannot attach (the cookbook says how to tell), only list
+the item under **Linked items** and keep the Task board-native.
 
 ## During the session
 
