@@ -5,7 +5,7 @@ Claude Code, Codex, and Cursor.
 
 | Skill | What it does |
 | --- | --- |
-| [`gentl-task-tracking`](skills/gentl-task-tracking/SKILL.md) | Keeps a Gentl board in step with your implementation while you work on a work item (Azure DevOps, GitLab, GitHub, Jira): the board Task, its implementation steps, the current plan, and a summarized log of how the work was steered. |
+| [`gentl-task-tracking`](skills/gentl-task-tracking/SKILL.md) | Keeps a Gentl board in step with your work while you do it, whether that is code, research, or an investigation: the board Task, its steps, the current plan, and a summarized log of how the work was steered. A tracker item (Azure DevOps, GitLab, GitHub, Jira) is linked when there is one, but not required. |
 
 ## Install a skill
 
@@ -17,9 +17,10 @@ npx skills add gentlsro/gentl-skills --skill gentl-task-tracking -g
 [skills CLI](https://github.com/vercel-labs/skills) asks which agents to install for; pass `-a claude-code -a codex -a
 cursor` to choose up front. Update later with `npx skills update`.
 
-The skill needs the Gentl Tasks MCP connected (below). Once both are in place, start working on a work item as usual
-("Picking up work item 1234 …"); the agent announces that tracking is on and which Task it writes to. Say "pause
-tracking" or "stop tracking" at any time.
+The skill needs the Gentl Tasks MCP connected (below). Once both are in place, start working as usual and say what the
+work is: a tracker item ("Picking up work item 1234 …"), a Gentl Task ("Continuing #412" or its name), or just ask to
+track it ("Research our payment provider limits, track it on Gentl"). The agent announces that tracking is on and
+which Task it writes to. Say "pause tracking" or "stop tracking" at any time.
 
 ## Connect the Gentl MCP servers
 
