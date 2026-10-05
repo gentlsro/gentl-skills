@@ -25,8 +25,11 @@ Tracking runs alongside the work. It must not block it or turn it into a reporti
    correlation key from the cookbook. No repository or external tracker is required. Do not ask the developer to
    supply a task or invent a ticket number. When the goal changes to unrelated work, use a separate Task.
 3. **Choose a board.** Use the existing Task's board. For new Tasks, call `get_task_tracking_context` and use the
-   board the developer named, else the resolved `preferredBoard.board`, else the only editable board. Ask only if
-   the destination is ambiguous or the preference has a problem; continue the work while waiting. Read
+   board the developer named; otherwise apply `boardSelectionInstructions`, when present, to the app, paths,
+   and goal, considering both board names and descriptions. Routing takes precedence over `preferredBoard.board`.
+   If no routing applies, use the resolved preferred board, else the only editable board. When routing is present,
+   always pass the selected `boardId` explicitly. Ask if routing spans several apps or leaves the destination unclear;
+   continue working while waiting. An existing Task stays on its board unless the developer requests a move. Read
    `get_board_task_metadata` for valid statuses and permissions, and retain that context for the session.
 4. **Announce once** that tracking is on, which Task it writes to, and that brief work summaries are visible to the
    team. Honour “pause tracking” or “stop tracking” immediately; log one short pause note if possible, then stop

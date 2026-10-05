@@ -61,6 +61,13 @@ claude mcp add-json gentl-editor --scope user '{"type":"http","url":"https://<yo
 Optional: add an `X-Gentl-Preferred-Board` header (board id or name) to the Tasks MCP so agents use that board unless
 you name another one.
 
+For a monorepo with boards per app, deployments supporting board routing also accept
+`X-Gentl-Board-Selection-Instructions`: a URL-encoded sentence such as
+`Use%20board%20X%20for%20apps%2Flc%20and%20board%20Y%20for%20apps%2Fapi.`. The agent considers the app,
+work, and board names and descriptions, then supplies the chosen board id. It asks when routing is unclear.
+For the in-app Gentl Tasks MCP tool, configure the same text in `boardSelectionInstructions` instead.
+Keep `X-Gentl-Preferred-Board` as a literal id or name; routing takes precedence over that default.
+
 ### Using the Editor MCP
 
 Open a grid in the Gentl editor and use its connect button. It gives you a short message with a session id and a

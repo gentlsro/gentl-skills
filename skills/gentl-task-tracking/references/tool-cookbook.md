@@ -81,7 +81,12 @@ For a new record, resolve the board:
 get_task_tracking_context {}
 ```
 
-Use the named board, else resolved `preferredBoard.board`, else the only board with `canEditTasks: true`.
+Use the board the developer named. Otherwise, when `boardSelectionInstructions` is present, apply it to the app,
+paths, and goal using board names and descriptions, and choose only a board with `canEditTasks: true`. Routing
+wins over a literal preferred board. If no routing applies, use resolved `preferredBoard.board`, else the only
+editable board. Whenever routing is configured, pass `boardId` explicitly on board-dependent calls, including
+when using a fallback. Ask if the destination or ownership of shared work is unclear; do not infer one board for
+unrelated work across apps. Older MCP deployments omit the instructions field; use the ordinary defaults there.
 A preference may return `problem: "not_found"` or `problem: "ambiguous"` with candidates. Ask about an unresolved
 destination; board names can repeat, so show ids or columns. Do not write to an arbitrary board while waiting.
 
