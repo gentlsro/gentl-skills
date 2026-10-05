@@ -1,0 +1,1 @@
+Investigate the slow order export for https://gitlab.com/acme/shop/-/issues/311. Use the local code to identify the likely cause; do not change code yet.

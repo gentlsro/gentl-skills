@@ -1,0 +1,9 @@
+The main cause is the **per-order delay** in [export.py](/private/var/folders/y_/j2_h1xb94p75thv9rcfqlkvr0000gn/T/gentl-activation-_jl2c4w1/export.py:6): `time.sleep(0.01)` runs for every row.
+
+That adds at least **10 seconds per 1,000 orders**, or **100 seconds per 10,000**.
+
+A local benchmark confirmed its impact: 200 rows took **2.40 seconds**; disabling the sleep in memory reduced that to **0.000029 seconds**, with identical output.
+
+Next, check why the pause exists, then remove it if no throttling requirement justifies it. Benchmark a representative export afterward. If it remains slow, measure row retrieval and serialization separately.
+
+No project files were changed.

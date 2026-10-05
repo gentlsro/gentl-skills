@@ -5,7 +5,7 @@ Claude Code, Codex, and Cursor.
 
 | Skill | What it does |
 | --- | --- |
-| [`gentl-task-tracking`](skills/gentl-task-tracking/SKILL.md) | Keeps a Gentl board in step with your work while you do it, whether that is code, research, or an investigation: the board Task, its steps, the current plan, and a summarized log of how the work was steered. A tracker item (Azure DevOps, GitLab, GitHub, Jira) is linked when there is one, but not required. |
+| [`gentl-task-tracking`](skills/gentl-task-tracking/SKILL.md) | Tracks ongoing work, including exploration, implementation, review, and documentation, with brief descriptions of what you're doing, why, and meaningful progress. No assigned task or external ticket required. |
 
 ## Install a skill
 
@@ -17,10 +17,12 @@ npx skills add gentlsro/gentl-skills --skill gentl-task-tracking -g
 [skills CLI](https://github.com/vercel-labs/skills) asks which agents to install for; pass `-a claude-code -a codex -a
 cursor` to choose up front. Update later with `npx skills update`.
 
-The skill needs the Gentl Tasks MCP connected (below). Once both are in place, start working as usual and say what the
-work is: a tracker item ("Picking up work item 1234 …"), a Gentl Task ("Continuing #412" or its name), or just ask to
-track it ("Research our payment provider limits, track it on Gentl"). The agent announces that tracking is on and
-which Task it writes to. Say "pause tracking" or "stop tracking" at any time.
+The skill needs the Gentl Tasks MCP connected (below). Once both are in place, start substantive work as usual
+("Investigate why exports are slow" or "Update the setup docs"). The skill is intended for automatic selection by
+the agent from the work being done; it finds or creates a Gentl Task and announces tracking. An existing Gentl Task
+or Azure DevOps, GitLab, GitHub, or Jira item can be used when available, but is optional. Tracking normally uses
+one Task per goal and short updates at meaningful milestones, without a prompt-by-prompt log or automatic subtasks.
+Say "pause tracking" or "stop tracking" at any time, and ask to resume when ready.
 
 ## Connect the Gentl MCP servers
 

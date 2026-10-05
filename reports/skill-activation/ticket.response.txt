@@ -1,0 +1,5 @@
+The likely cause is the unconditional `time.sleep(0.01)` inside the row loop in [export.py](/private/var/folders/y_/j2_h1xb94p75thv9rcfqlkvr0000gn/T/gentl-ticket-bpuape9y/export.py:6).
+
+It adds 10 milliseconds per order: approximately **10 seconds for 1,000 orders** or **100 seconds for 10,000**, plus processing overhead. A local timing run confirmed 100 rows took about **1.19 seconds**, with 1 second attributable to explicit sleeps.
+
+The next step would be to determine whether that delay serves a required throttling purpose before removing it. No code was changed. I couldn’t retrieve issue #311, so this finding is based on the local code and timing run.

@@ -1,0 +1,5 @@
+The likely cause is [`time.sleep(0.01)` inside the per-order loop](</private/var/folders/y_/j2_h1xb94p75thv9rcfqlkvr0000gn/T/gentl-paused-lvns43e4/export.py:6>). Each order adds at least 10 ms of deliberate delay, and orders are processed sequentially.
+
+I measured 100 orders at **1.20 seconds** and 200 at **2.41 seconds**. For 10,000 orders, the sleep alone adds at least **100 seconds**, plus overhead.
+
+Removing the sleep should eliminate this bottleneck unless it serves an intentional throttling requirement. I made no code changes and wrote nothing to Gentl.

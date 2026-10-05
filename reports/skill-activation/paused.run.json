@@ -1,0 +1,9 @@
+{
+  "id": "paused",
+  "title": "Work with tracking stopped",
+  "prompt": "Stop tracking; do not write any further work summaries to Gentl. Investigate why order exports are slow in this project and explain the likely cause.",
+  "expected_activation": false,
+  "exit_code": 0,
+  "seconds": 18.69,
+  "workspace": "/var/folders/y_/j2_h1xb94p75thv9rcfqlkvr0000gn/T/gentl-paused-lvns43e4"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "ticket",
+  "title": "Investigation with a ticket",
+  "prompt": "Investigate the slow order export for https://gitlab.com/acme/shop/-/issues/311. Use the local code to identify the likely cause; do not change code yet.",
+  "expected_activation": true,
+  "exit_code": 0,
+  "seconds": 29.14,
+  "workspace": "/var/folders/y_/j2_h1xb94p75thv9rcfqlkvr0000gn/T/gentl-ticket-bpuape9y"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "documentation",
+  "title": "Documentation without a ticket",
+  "prompt": "Read export.py and update README.md to explain how to call export_orders and what it returns.",
+  "expected_activation": true,
+  "exit_code": 0,
+  "seconds": 21.98,
+  "workspace": "/var/folders/y_/j2_h1xb94p75thv9rcfqlkvr0000gn/T/gentl-documentation-6cd6vh_p"
+}

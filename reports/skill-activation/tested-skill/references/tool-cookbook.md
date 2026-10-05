@@ -31,28 +31,9 @@ identity for new work. Different investigations on the same branch must not sile
   case-sensitive and trimmed. Use the same spelling every time; lowercase hosts and organizations.
 - Older records may use `git` with `<remote host>/<repo path>#<branch>`. Resume them when their goal matches;
   do not create new records with that branch-only identity.
-- If a ticket is supplied later, look up its correlation first. If it already belongs to another Task, show both
-  records and ask which to continue; do not silently switch or duplicate the work. Otherwise attach it to the
-  current Task as shown below. Keep the existing work reference too.
-
-## Attach a tracker item to an existing Task
-
-When `upsert_tracked_task` exposes `taskId`, attach the item without creating a second Task:
-
-```json
-upsert_tracked_task {
-  "provider": "gitlab",
-  "externalId": "gitlab.com/acme/shop#311",
-  "taskId": "<current Task id>",
-  "url": "https://gitlab.com/acme/shop/-/issues/311",
-  "metadata": { "source": "gentl-task-tracking" }
-}
-```
-
-The reply has `created: false`. Repeating the call is safe, and a Task may carry several correlations.
-`CONFLICT` with `details.taskId` means the key belongs to that other Task: show both and ask which to continue.
-Do not retry with a changed key or another Task id. `NOT_FOUND` or `FORBIDDEN` means nothing was attached.
-If the exposed schema lacks `taskId`, note the URL on the current Task and keep its existing addressing.
+- If a ticket is supplied later, look up its correlation first. If it already has a Task, continue there and leave
+  short cross-links on both records. Otherwise keep the current work record and note the ticket URL; do not
+  change its key or create a duplicate solely to adopt the ticket identity.
 
 ## Find, choose a board, and create
 
@@ -143,11 +124,8 @@ Investigating export timeouts to choose a fix. The database query is fast; check
 upsert_tracked_task { "provider": "gentl-work", "externalId": "work/<UUID>", "status": "<IN_PROGRESS status>", "description": "<preserved text and short tracking section>" }
 ```
 
-For native Tasks without correlation, use `get_task { "by": "id", "id": "<Task id>" }`,
-`add_task_comment { "taskId": "<Task id>", "message": "<brief summary>" }`, and
-`update_task { "taskId": "<Task id>", "status": "<valid status>", "description": "<preserved text>" }`.
-Native comments are not deduplicated: after a timeout or dropped connection, read recent comments before retrying,
-and retry only if the comment is missing. Use the same summary and preservation rules.
+For native Tasks without correlation, use the server's equivalent comment/update tools with the Task id and the
+same summary and preservation rules. Consult their exposed schemas instead of assuming tracked-call arguments.
 
 ## Reopen and finish
 
@@ -165,8 +143,7 @@ complete_tracked_task { "provider": "gentl-work", "externalId": "work/<UUID>" }
 
 Without `status`, this picks the sole status in the board's `DONE` column. If it returns candidate statuses, ask
 which one to use. An investigation result is a valid outcome; do not imply that a proposed fix was implemented.
-For native Tasks without correlation, use `update_task` with `taskId`, a status from the board's `DONE` column,
-and `doneDate` set to the current UTC timestamp. Ask if several completion statuses remain.
+For native Tasks without correlation, use the exposed completion tool with their id.
 
 ## Older Gentl deployments
 

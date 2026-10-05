@@ -1,0 +1,3 @@
+Removed the per-row delay and unused `time` import from [export.py](/var/folders/y_/j2_h1xb94p75thv9rcfqlkvr0000gn/T/gentl-implementation-1u9kp421/export.py).
+
+Verified identical output against the original for five input cases. Generator input and a 1,000-row export also passed.

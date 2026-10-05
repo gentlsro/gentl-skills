@@ -1,0 +1,1 @@
+Stop tracking; do not write any further work summaries to Gentl. Investigate why order exports are slow in this project and explain the likely cause.

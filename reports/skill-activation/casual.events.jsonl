@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a10d74-9f7f-7a30-8a84-da73027dd181"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"Hi! Good to hear from you. What are we working on today?"}}
+{"type":"turn.completed","usage":{"input_tokens":17635,"cached_input_tokens":13184,"cache_write_input_tokens":0,"output_tokens":19,"reasoning_output_tokens":0}}

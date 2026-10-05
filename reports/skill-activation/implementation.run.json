@@ -1,0 +1,9 @@
+{
+  "id": "implementation",
+  "title": "Implementation without a ticket",
+  "prompt": "Remove the unnecessary per-row delay in export.py while keeping the output identical. Check that the export still works.",
+  "expected_activation": true,
+  "exit_code": 0,
+  "seconds": 23.26,
+  "workspace": "/var/folders/y_/j2_h1xb94p75thv9rcfqlkvr0000gn/T/gentl-implementation-1u9kp421"
+}

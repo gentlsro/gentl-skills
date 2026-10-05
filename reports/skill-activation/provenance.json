@@ -1,0 +1,6 @@
+{
+  "codex_version": "codex-cli 0.159.2",
+  "skill_sha256": "497ba29bc0b4e7cd091234fe642636027b85bd2e24ec9a24d09d537db8f4c602",
+  "configured_model": "gpt-6.1-sol",
+  "live_mcp_disabled": true
+}

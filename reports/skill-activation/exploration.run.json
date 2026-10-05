@@ -1,0 +1,6 @@
+{
+  "exit_code": 0,
+  "seconds": 26.1,
+  "prompt": "Investigate why order exports are slow in this project. Explain the likely cause and what we should try next.",
+  "workspace": "/var/folders/y_/j2_h1xb94p75thv9rcfqlkvr0000gn/T/gentl-activation-_jl2c4w1"
+}

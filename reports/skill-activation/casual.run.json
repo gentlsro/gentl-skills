@@ -1,0 +1,9 @@
+{
+  "id": "casual",
+  "title": "Casual conversation",
+  "prompt": "Hi! Hope you are having a good day.",
+  "expected_activation": false,
+  "exit_code": 0,
+  "seconds": 4.16,
+  "workspace": "/var/folders/y_/j2_h1xb94p75thv9rcfqlkvr0000gn/T/gentl-casual-bp0d0_y2"
+}

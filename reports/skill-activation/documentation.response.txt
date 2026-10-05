@@ -1,0 +1,3 @@
+Updated [README.md](/var/folders/y_/j2_h1xb94p75thv9rcfqlkvr0000gn/T/gentl-documentation-6cd6vh_p/README.md) with a calling example, return format, empty-input behavior, and per-row delay.
+
+Verified the example and return behavior against `export.py`.
