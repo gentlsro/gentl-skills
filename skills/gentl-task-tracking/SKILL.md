@@ -30,7 +30,9 @@ Tracking runs alongside the work. It must not block it or turn it into a reporti
    If no routing applies, use the resolved preferred board, else the only editable board. When routing is present,
    always pass the selected `boardId` explicitly. Ask if routing spans several apps or leaves the destination unclear;
    continue working while waiting. An existing Task stays on its board unless the developer requests a move. Read
-   `get_board_task_metadata` for valid statuses and permissions, and retain that context for the session.
+   `get_board_task_metadata` for valid statuses, sprints, and permissions, and retain that context for the session.
+   When adding a Task to a board, assign its active Sprint as described in the cookbook; respect an explicit
+   developer sprint choice and preserve sprint assignments when resuming or updating an existing Task.
 4. **Announce once** that tracking is on, which Task it writes to, and that brief work summaries are visible to the
    team. Honour “pause tracking” or “stop tracking” immediately; log one short pause note if possible, then stop
    writing until asked to resume.

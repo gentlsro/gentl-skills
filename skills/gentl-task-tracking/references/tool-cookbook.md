@@ -97,6 +97,13 @@ get_board_task_metadata { "boardId": "<board id>" }
 Use valid names from the metadata. Choose status by the column's `processState` (`INACTIVE`, `IN_PROGRESS`,
 `DONE`), not by guessing from names. Omit optional type, priority, assignee, and other fields unless useful and known.
 
+When creating a Task, inspect the board metadata's `sprints` and select the Sprint whose `status` is `ACTIVE`.
+The list can also contain `NOT_STARTED` and `READY` Sprints; their presence does not make them active. Pass the
+active Sprint's id in `sprints` in the creation call, as below. Respect an explicit developer choice of another
+Sprint or no Sprint. If none is active, omit `sprints`; if several are active and the developer has not selected
+one, ask which to use while continuing the work. Refresh metadata before creating if the retained Sprint context
+may have changed.
+
 ```json
 upsert_tracked_task {
   "provider": "gentl-work",
@@ -104,12 +111,19 @@ upsert_tracked_task {
   "boardId": "<board id>",
   "name": "Investigate slow order exports",
   "status": "<status in an IN_PROGRESS column>",
+  "sprints": ["<active Sprint id from board metadata>"],
   "description": "Investigating why large order downloads time out so we can choose an appropriate fix."
 }
 ```
 
 `name` and `boardId` are required on creation only. For a known external item, substitute its key and URL.
 Use its title when suitable; describe the actual work, including investigation before implementation.
+
+The same Sprint selection applies to `create_task` and to a developer-requested board move: read the destination
+board's metadata and pass its active Sprint in the move's `sprints` field. Do not copy a Sprint from the old board.
+Omit `sprints` on routine updates, resume, reopen, and correlation attachment to an existing Task: the field
+replaces all current Sprint assignments. On a creation retry, reuse the same Sprint selection rather than adding
+the Task to a different Sprint because tracking resumed.
 
 ## Progress and current state
 
