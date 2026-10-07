@@ -10,7 +10,7 @@ Claude Code, Codex, and Cursor.
 ## Install a skill
 
 ```bash
-npx skills add gentlsro/gentl-skills --skill gentl-task-tracking -g
+npx skills add gentlsro/gentl-skills --skill gentl-task-tracking
 ```
 
 `-g` installs it for all your projects; leave it out to install into the current repository only. The
